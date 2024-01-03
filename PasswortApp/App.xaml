@@ -1,0 +1,13 @@
+﻿<Application x:Class="PasswortApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:PasswortApp"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ControlTemplate x:Key="header" TargetType="Label">
+            <Grid Height="50" Background="Indigo">
+                <Label Content="Passwort Saver" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+            </Grid>
+        </ControlTemplate>
+    </Application.Resources>
+</Application>
