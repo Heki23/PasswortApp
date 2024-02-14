@@ -1,30 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PasswortApp
+﻿namespace PasswortApp
 {
     internal class Model
     {
-        private string app;
-        private string benutzername;
-        private string passwort;
+        // Machen Sie die Eigenschaften schreibbar (setzbar)
+        public string App { get; set; }
+        public string Benutzername { get; set; }
+        public string Passwort { get; set; }
 
+        // Sie können auch einen parameterlosen Konstruktor hinzufügen, falls erforderlich
+        public Model() { }
 
-        public string App { get { return app; } }
-        public string Benutzername { get { return benutzername; } }
-        public string Passwort { get { return passwort; } }
-
-
-        public Model(string a, string b, string p)
+        // Konstruktor mit Parametern, um Werte beim Erstellen des Objekts festzulegen
+        public Model(string app, string benutzername, string passwort)
         {
-            app= a;
-            benutzername = b;
-            passwort= p;
+            App = app;
+            Benutzername = benutzername;
+            Passwort = passwort;
         }
-
-
     }
 }

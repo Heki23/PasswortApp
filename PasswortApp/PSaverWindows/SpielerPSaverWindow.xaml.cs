@@ -22,35 +22,73 @@ namespace PasswortApp
     public partial class SpielerPSaverWindow : Window
     {
         private NeuPasswordSaverWindow neuPasswordSaverWindow = new NeuPasswordSaverWindow();
-        private Viewmodel viewmodel = new Viewmodel();
 
         public SpielerPSaverWindow()
         {
             InitializeComponent();
+            RefreshListView();
+        }
+
+        private void RefreshListView()
+        {
+            //Hier habe ich deshalb gemacht das die List automatisch aktualsiert ohne große Code
+            Viewmodel viewmodel = new Viewmodel();
             benutzerdatenlistbox.ItemsSource = viewmodel.SpielePasswordDatenList;
-            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            timer.Tick += saveNewPassword;
-            timer.Start();
         }
 
         private void Neue_Click(object sender, RoutedEventArgs e)
         {
-          // NeuPasswordSaverWindow neuPasswordSaverWindow = new NeuPasswordSaverWindow();
-            neuPasswordSaverWindow.Show();
-        }
-        private void saveNewPassword(object sender, EventArgs e)
-        {
-
-            if (neuPasswordSaverWindow.afterSaveButtonClicken == true)
+            // Fenster für das Speichern eines neuen Passworts anzeigen
+            neuPasswordSaverWindow.currentWindow = "SpielerPSaverWindow";
+            neuPasswordSaverWindow.ShowDialog(); // Verwenden Sie ShowDialog, um auf das Ergebnis zu warten
+            if (neuPasswordSaverWindow.afterSaveButtonClicken)
             {
-                MessageBox.Show(neuPasswordSaverWindow.afterSaveButtonClicken.ToString(), "endlich");
-
-                //viewmodel.SpielePasswordDatenList.Add(new Model("asd", "sdsd", "2123"));
-                viewmodel.SpielePasswordDatenList.Add(new Model(neuPasswordSaverWindow.neuAppTextBox, neuPasswordSaverWindow.neuAnmeldeName, neuPasswordSaverWindow.neuPasswortTextBox));
-                neuPasswordSaverWindow.afterSaveButtonClicken = false;
-                benutzerdatenlistbox.Items.Refresh();
+                // Wenn das Speichern erfolgreich war, aktualisieren Sie die ListView
+                RefreshListView();
             }
-    }
+        }
 
+        private void BenutzernameCopy_Click(object sender, RoutedEventArgs e)
+        {
+            //Hier bekommt ich welche Btn, angeklickt wurde
+            Button button = (Button)sender;
+
+            // Dynamische Variable zum Speichern des zugehörigen Datenelements
+            //weil der Typ des Datenelements zur Kompilierungszeit nicht bekannt ist.
+            //Statische Typisierung umgehen
+            //Eigenschaften des Objekts zugreifen, indem Namen als strings verwenden, ohne den Typ des Objekts explizit angeben zu müssen
+            dynamic dataItem = button.DataContext;
+            //Bekommt Daten von data item
+            string benutzername = dataItem.Benutzername;
+            //wird zu Clipboard Kopiert 
+            Clipboard.SetText(benutzername);
+        }
+
+        private void PasswordCopy_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            dynamic dataItem = button.DataContext;
+            string passwort = dataItem.Passwort;
+            Clipboard.SetText(passwort);
+
+        }
+
+        private void Loeschen_Click(object sender, RoutedEventArgs e)
+        {
+            Viewmodel viewmodel2 = new Viewmodel();
+            //Bekommt die ausgewählten Elemente in der ListView
+            var selectedItems = benutzerdatenlistbox.SelectedItems.Cast<Model>();
+
+            // Jedes ausgewählte Element durchlaufen
+            foreach (var selectedItem in selectedItems)
+            {
+                //Aus der Liste löschen
+                viewmodel2.ArbeitPasswordDatenList.Remove(selectedItem);
+                string currentWindowName = "SpielerPSaverWindow"; ;
+                //Aus datenbank löschen
+                viewmodel2.DeleteSelectedItemsFromDatabase(selectedItem, currentWindowName);
+            }
+            RefreshListView();
+        }
     }
 }

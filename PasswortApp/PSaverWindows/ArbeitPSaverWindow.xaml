@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PasswortApp"
         mc:Ignorable="d"
-        Title="WindowArbeitPassword" Height="450" Width="800">
-    <!--Sammlung von Ressourcen, die für ein Fenster verfügbar sind -->
+        Title="WindowArbeitPassword" Height="450" Width="800" SizeToContent="WidthAndHeight" ResizeMode="NoResize" Loaded="Window_Loaded">
     <Window.Resources>
         <ResourceDictionary>
             <!--  Hierbei wird festgelegt, wie daten in der
@@ -18,61 +17,71 @@
                         <!-- hier habe ich drei spalte in grid erstellt-->
                         <ColumnDefinition Width="2*"></ColumnDefinition>
                         <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="25"></ColumnDefinition>
                         <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="25"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <!-- Das habe ich wegen borderbrush gemacht -->
-                    <Label BorderBrush="Black" BorderThickness="1"  Grid.Column="0" Width="150">
+                    <Label BorderBrush="Black" BorderThickness="1"  Grid.Column="0" Width="138">
                         <!-- Das habe ich wegen Textwrap(Textumbruch) gemacht -->
                         <TextBlock Text="{Binding Path=App}" Foreground="Black" TextWrapping="Wrap"></TextBlock>
                     </Label>
-                    <Label BorderBrush="Black" BorderThickness="1"  Grid.Column="1" Width="167">
+                    <Label BorderBrush="Black" BorderThickness="1"  Grid.Column="1" Width="140">
                         <TextBlock Text="{Binding Path=Benutzername}" Foreground="Black" TextWrapping="Wrap"></TextBlock>
                     </Label>
-                    <Label BorderBrush="Black" BorderThickness="1"  Grid.Column="2" Width="167">
+                    <Button Width="25" Grid.Column="2" Background="White" ToolTip="Kopieren" Click="BenutzernameCopy_Click" BorderBrush="#FF0E02FF">
+                        <Button.Content>
+                            <Image Source="/Icon/copy.png" Stretch="UniformToFill"/>
+                        </Button.Content>
+                    </Button>
+                    <Label BorderBrush="Black" BorderThickness="1"  Grid.Column="3" Width="140">
                         <TextBlock Text="{Binding Path=Passwort}" Foreground="Black" TextWrapping="WrapWithOverflow"></TextBlock>
                     </Label>
+                    <Button Width="25" Grid.Column="4" Background="White" ToolTip="Kopieren" Click="PasswordCopy_Click" BorderBrush="#FF0E02FF">
+                        <Button.Content>
+                            <Image Source="/Icon/copy.png" Stretch="UniformToFill"/>
+                        </Button.Content>
+                    </Button>
 
                 </Grid>
             </DataTemplate>
         </ResourceDictionary>
     </Window.Resources>
 
-    <StackPanel>
 
-        <Label Template="{StaticResource header}" />
-        <TextBox  HorizontalAlignment="Left" Height="36" Margin="592,36,0,0" VerticalAlignment="Top" Width="179" BorderThickness="2" BorderBrush="Black" Text="Suche" FontSize="15"/>
-       
-     
-        <ListView x:Name="benutzerdatenlistbox" ItemTemplate="{StaticResource PasswortSaverTemplate}" Background="#FFEDEEF1" Foreground="White" BorderBrush="Black" BorderThickness="1" Width="500" Height="200" Margin="250,40,0,-20" />
+    <Grid>
+
+        <Label Template="{StaticResource header}" Margin="0,-189,0,189" />
+
+        <TextBox  HorizontalAlignment="Left" Height="36" Margin="597,68,0,0" VerticalAlignment="Top" Width="178" BorderThickness="2" BorderBrush="Black" Text="Suche" FontSize="15"/>
 
 
-        <Grid Width="70" Margin="0,-110,320,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0*"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <StackPanel Width="60" Margin="5,0,5,0" Grid.RowSpan="2">
-                <Button Height="54" Width="60"  Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" Click="Neue_Click" >
-                        <Image Source="/Icon/schaltflache-hinzufugen.png" RenderOptions.BitmapScalingMode="HighQuality" Height="49" Stretch="Uniform" OpacityMask="Black"/>
-                </Button>
-                <Button HorizontalAlignment="Left" Height="54"  VerticalAlignment="Top" Width="60" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}">
-                        <Image Source="/Icon/minus.png" RenderOptions.BitmapScalingMode="HighQuality" Height="49" Stretch="Uniform" OpacityMask="Black"/>
-                </Button>
-            </StackPanel>
-        </Grid>
-        <Grid Width="518" Height="29" Margin="268,-385,0,0">
+        <WrapPanel Width="60" Height="130" Margin="157,217,583,87">
+            <Button Height="54" Width="60"  Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" Click="Neue_Click" >
+                <Image Source="/Icon/schaltflache-hinzufugen.png" RenderOptions.BitmapScalingMode="HighQuality" Height="49" Stretch="Uniform" OpacityMask="Black"/>
+            </Button>
+            <Button HorizontalAlignment="Left" Height="54"  VerticalAlignment="Top" Width="60" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}" Click="Loeschen_Click">
+                <Image Source="/Icon/minus.png" RenderOptions.BitmapScalingMode="HighQuality" Height="49" Stretch="Uniform" OpacityMask="Black"/>
+            </Button>
+        </WrapPanel>
+
+        <Grid Width="518" Height="29" Margin="275,119,7,286">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Label Content="App" Grid.Column="0" Height="28" Width="157" Foreground="White" Background="Black"  HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="White" BorderThickness="1"/>
-            <Label Content="Anmeldename" Grid.Column="1"  HorizontalAlignment="Left" Height="28"  VerticalAlignment="Center" Width="166" Foreground="White" Background="Black" BorderBrush="White" BorderThickness="1"/>
-            <Label Content="Passwort" Grid.Column="2"  HorizontalAlignment="Left" Height="28" VerticalAlignment="Center" Width="178" Foreground="White" Background="Black"  BorderBrush="White" BorderThickness="1"/>
-
+            <Label Content="App" Grid.Column="0" Height="28" Width="145" Foreground="White" Background="Black"  HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="White" BorderThickness="1"/>
+            <Label Content="Anmeldename" Grid.Column="1"  HorizontalAlignment="Left" Height="28"  VerticalAlignment="Center" Width="165" Foreground="White" Background="Black" BorderBrush="White" BorderThickness="1"/>
+            <Label Content="Passwort" Grid.Column="2"  HorizontalAlignment="Left" Height="28" VerticalAlignment="Center" Width="191" Foreground="White" Background="Black"  BorderBrush="White" BorderThickness="1"/>
         </Grid>
-        <Label Content="Arbeit" HorizontalAlignment="Left" Height="86" Margin="24,-203,0,0" VerticalAlignment="Top" Width="184" FontWeight="Bold" FontSize="35"/>
-        <Label Content="Passwort" HorizontalAlignment="Left" Height="86" Margin="24,-160,0,0" VerticalAlignment="Top" Width="184" FontSize="20"/>
+        <ListView x:Name="benutzerdatenlistbox" ItemTemplate="{StaticResource PasswortSaverTemplate}" Background="#FFEDEEF1" Foreground="White" BorderBrush="Black" BorderThickness="1" Height="255" Width="500" Margin="275,147,25,32" />
 
-    </StackPanel>
+
+        <Label Content="Arbeit" HorizontalAlignment="Left" Height="55" Margin="21,130,0,0" VerticalAlignment="Top" Width="184" FontWeight="Bold" FontSize="35"/>
+        <Label Content="Passwort" HorizontalAlignment="Left" Height="51" Margin="21,185,0,0" VerticalAlignment="Top" Width="107" FontSize="20"/>
+
+
+
+    </Grid>
 </Window>

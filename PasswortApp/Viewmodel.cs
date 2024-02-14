@@ -1,32 +1,104 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.SqlClient; // Für SQL Server Datenbankverbindung
 using System.Windows;
 
 namespace PasswortApp
 {
     internal class Viewmodel
     {
+        private SqlConnection connection;
 
+        public ObservableCollection<Model> ArbeitPasswordDatenList { get; private set; }
+        public ObservableCollection<Model> PrivatePasswordDatenList { get; private set; }
+        public ObservableCollection<Model> SpielePasswordDatenList { get; private set; }
 
-        private List<Model> arbeitPasswordDatenList = new List<Model>();
-        private List<Model> privatePasswordDatenList = new List<Model>();
-        private List<Model> spielePasswordDatenList = new List<Model>();
-
-
-
-        public Viewmodel() 
+        public Viewmodel()
         {
-            arbeitPasswordDatenList.Add(new Model("Email", "Test", "1234"));
-            arbeitPasswordDatenList.Add(new Model("Email2", "Tes2222222222222222222222222222222222222t", "12234"));
+            ArbeitPasswordDatenList = new ObservableCollection<Model>();
+            PrivatePasswordDatenList = new ObservableCollection<Model>();
+            SpielePasswordDatenList = new ObservableCollection<Model>();
 
-            privatePasswordDatenList.Add(new Model("private", "ptest", "123"));
+            // Verbindung zur Datenbank herstellen
+            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Schueler\\source\\repos\\PasswortApp\\PasswortApp\\Database1.mdf;Integrated Security=True";
+            connection = new SqlConnection(connectionString);
+
+            LoadDataFromDatabase();
         }
 
-        public List<Model> ArbeitPasswordDatenList { get { return arbeitPasswordDatenList; } set { arbeitPasswordDatenList = value; } }
-        public List<Model> PrivatePasswordDatenList { get { return privatePasswordDatenList; } set { privatePasswordDatenList = value; } } 
-        public List<Model> SpielePasswordDatenList { get {return spielePasswordDatenList; } set { spielePasswordDatenList = value; } }
+        private void LoadDataFromDatabase()
+        {
+            connection.Open();
+
+            string queryArbeit = "SELECT App, BenutzerName, Password FROM ArbeitSDB";
+            LoadDataFromQuery(queryArbeit, ArbeitPasswordDatenList);
+
+            string queryPrivate = "SELECT App, BenutzerName, Password FROM PrivateSDB";
+            LoadDataFromQuery(queryPrivate, PrivatePasswordDatenList);
+
+            string querySpiele = "SELECT App, BenutzerName, Password FROM SpieleSDB";
+            LoadDataFromQuery(querySpiele, SpielePasswordDatenList);
+
+
+        }
+
+        private void LoadDataFromQuery(string query, ObservableCollection<Model> collection)
+        {
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+              
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    collection.Add(new Model
+                    {
+                        App = reader["App"].ToString(),
+                        Benutzername = reader["BenutzerName"].ToString(),
+                        Passwort = reader["Password"].ToString()
+                    });
+                }
+                reader.Close();
+            }
+        }
+        public void DeleteSelectedItemsFromDatabase(Model model, string currentWindowName)
+        {
+
+            if (currentWindowName == "ArbeitPSaverWindow")
+            {
+                using (SqlCommand command = new SqlCommand("DELETE FROM ArbeitSDB WHERE App = @App AND BenutzerName = @BenutzerName AND Password = @Password", connection))
+                {
+                    //connection.Open();
+                    command.Parameters.AddWithValue("@App", model.App);
+                    command.Parameters.AddWithValue("@BenutzerName", model.Benutzername);
+                    command.Parameters.AddWithValue("@Password", model.Passwort);
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            if (currentWindowName == "PrivatePSaverWindow")
+            {
+                using (SqlCommand command = new SqlCommand("DELETE FROM PrivateSDB WHERE App = @App AND BenutzerName = @BenutzerName AND Password = @Password", connection))
+                {
+                    //connection.Open();
+                    command.Parameters.AddWithValue("@App", model.App);
+                    command.Parameters.AddWithValue("@BenutzerName", model.Benutzername);
+                    command.Parameters.AddWithValue("@Password", model.Passwort);
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            if (currentWindowName == "SpielerPSaverWindow")
+            {
+                using (SqlCommand command = new SqlCommand("DELETE FROM SpieleSDB WHERE App = @App AND BenutzerName = @BenutzerName AND Password = @Password", connection))
+                {
+                    //connection.Open();
+                    command.Parameters.AddWithValue("@App", model.App);
+                    command.Parameters.AddWithValue("@BenutzerName", model.Benutzername);
+                    command.Parameters.AddWithValue("@Password", model.Passwort);
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+        }
     }
 }

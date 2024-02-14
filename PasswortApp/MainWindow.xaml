@@ -5,7 +5,64 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PasswortApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded" KeyDown="Window_KeyDown" >
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="RoundedBtnTemplate" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="15" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FFBC00FF"/>
@@ -13,11 +70,59 @@
         </LinearGradientBrush>
     </Window.Background>
     <Grid >
-        <Rectangle HorizontalAlignment="Left" Height="378" Margin="204,22,0,0" Stroke="#FF4D4848" VerticalAlignment="Top" Width="374" Fill="White" Opacity="0.8"/>
-        <TextBox x:Name="loginEingebeneName" HorizontalAlignment="Left" Height="36" Margin="240,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" BorderBrush="Gray" FontSize="20" Background="White" Opacity="0.85"/>
-        <PasswordBox x:Name="loginEingebenePasswort" HorizontalAlignment="Left" Height="36" Margin="240,198,0,0" VerticalAlignment="Top" Width="300" BorderBrush="Gray" FontSize="20" Opacity="0.85"/>
-        <Label Content="Anmelden" HorizontalAlignment="Left" Height="58" Margin="330,44,0,0" VerticalAlignment="Top" Width="169" FontSize="25" />
-        <Button Content="Anmelden" HorizontalAlignment="Left" Margin="334,288,0,0" VerticalAlignment="Top" Height="34" Width="114" Click="Button_Click" Background="{x:Null}" BorderBrush="#FF1600FF" Foreground="#FF0820FF"/>
+        <Grid x:Name="loginWindow">
+            <Rectangle x:Name="loginWhiteRectangle" HorizontalAlignment="Left" Height="378" Margin="204,22,0,0" Stroke="#FF4D4848" VerticalAlignment="Top" Width="374" Fill="White" Opacity="0.8">
+                <Rectangle.Style>
+                    <Style TargetType="Rectangle">
+                        <Setter Property="RadiusX" Value="10"/>
+                        <Setter Property="RadiusY" Value="10"/>
+                    </Style>
+                </Rectangle.Style>
+            </Rectangle>
 
+
+            <TextBox x:Name="loginEingebeneName" HorizontalAlignment="Left" Height="36" Margin="240,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" BorderBrush="Gray" FontSize="20" Background="White" Opacity="0.85"/>
+            <PasswordBox x:Name="loginEingebenePasswort"  Focusable="True" HorizontalAlignment="Left" Height="36" Margin="240,198,0,0" VerticalAlignment="Top" Width="300" BorderBrush="Gray" FontSize="20" Opacity="0.85"/>
+
+
+            <Label x:Name="AnmeldenLabel" Content="Anmelden" HorizontalAlignment="Left" Height="58" Margin="326,54,0,0" VerticalAlignment="Top" Width="128" FontSize="25" />
+            <Button Style="{DynamicResource RoundedBtnTemplate}" x:Name="AnmeldenBtn" Content="Anmelden" HorizontalAlignment="Left" Margin="334,288,0,0" VerticalAlignment="Top" Height="34" Width="114" Click="Button_Click" Background="{x:Null}" BorderBrush="#FF1600FF" BorderThickness="2" Foreground="#FF0820FF" FontWeight="Medium"/>
+        </Grid>
+        <Grid x:Name="OptionWindow" Visibility="Hidden">
+        <Rectangle x:Name="OptionwindowRectangle"   HorizontalAlignment="Center" Height="388" Stroke="Black" VerticalAlignment="Center" Width="500" Fill="White" Opacity="0.8">
+            <Rectangle.Style>
+                <Style TargetType="Rectangle">
+                    <Setter Property="RadiusX" Value="10"/>
+                    <Setter Property="RadiusY" Value="10"/>
+                </Style>
+            </Rectangle.Style>
+        </Rectangle>
+
+        <Button x:Name="SpielerButton" Content="Spieler Passwort"  HorizontalAlignment="Center" Height="40" Margin="0,128,0,0" VerticalAlignment="Top" Width="460" Background="{x:Null}" FontSize="20" Click="SpielerButton_Click" BorderBrush="#FF0022FF" BorderThickness="2" Foreground="#FF000FFF">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="ArbeitButton" Content="Arbeit Passwort"  HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="460" Background="{x:Null}" FontSize="20" Click="ArbeitButton_Click_1" BorderBrush="#FF0022FF" BorderThickness="2" Foreground="#FF000FFF">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="PrivateButton" Content="Private Passwort" HorizontalAlignment="Center" Height="40" Margin="0,242,0,0" VerticalAlignment="Top" Width="460" Background="{x:Null}" FontSize="20" Click="PrivateButton_Click" BorderBrush="#FF0022FF" BorderThickness="2" Foreground="#FF000FFF">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        </Grid>
     </Grid>
+    <!--<Grid>
+
+    </Grid>-->
+
 </Window>

@@ -9,5 +9,24 @@
                 <Label Content="Passwort Saver" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
             </Grid>
         </ControlTemplate>
+       
+            <Grid x:Key="NeuePasswortSWindow">
+                <Rectangle>
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFBC00FF"/>
+                            <GradientStop Color="#FF0F3ED1" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBox x:Name="AppTextBox" HorizontalAlignment="Left" Height="42" Margin="10,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="126" BorderThickness="1" BorderBrush="Black" FontSize="15"/>
+                <TextBox x:Name="AnmeldenameTextBox" HorizontalAlignment="Left" Height="42" Margin="141,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="126" BorderThickness="1" BorderBrush="Black" FontSize="15"/>
+                <TextBox x:Name="PasswortTextBox" HorizontalAlignment="Left" Height="42" Margin="272,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="126" BorderThickness="1" BorderBrush="Black" FontSize="15"/>
+                <Label Content="App" HorizontalAlignment="Left" Height="32" Margin="10,29,0,0" VerticalAlignment="Top" Width="150" Foreground="White" FontSize="15"/>
+                <Label Content="Anmeldename" HorizontalAlignment="Left" Height="31" Margin="141,31,0,0" VerticalAlignment="Top" Width="150" Foreground="White" FontSize="15"/>
+                <Label Content="Passwort" HorizontalAlignment="Left" Height="30" Margin="272,32,0,0" VerticalAlignment="Top" Width="150" Foreground="White" FontSize="15"/>
+                <Button Content="Speichern" HorizontalAlignment="Left" Height="34" Margin="145,121,0,0" VerticalAlignment="Top" Width="112" Background="{x:Null}" BorderBrush="#FFFAF4F4" Foreground="White" Click="SpeichernBtn_Click"/>
+            </Grid>
+        
     </Application.Resources>
 </Application>
