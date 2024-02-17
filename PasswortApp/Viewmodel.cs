@@ -20,7 +20,8 @@ namespace PasswortApp
             SpielePasswordDatenList = new ObservableCollection<Model>();
 
             // Verbindung zur Datenbank herstellen
-            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Schueler\\source\\repos\\PasswortApp\\PasswortApp\\Database1.mdf;Integrated Security=True";
+            string connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Initial Catalog={MainWindow.username}";
+          //  string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Schueler\\source\\repos\\PasswortApp\\PasswortApp\\Database1.mdf;Integrated Security=True";
             connection = new SqlConnection(connectionString);
 
             LoadDataFromDatabase();

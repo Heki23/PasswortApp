@@ -23,16 +23,13 @@ namespace PasswortApp.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Schueler\\source\\repo" +
-            "s\\PasswortApp\\PasswortApp\\Database1.mdf;Integrated Security=True")]
-        public string ArbeitDBCN {
+        [global::System.Configuration.DefaultSettingValueAttribute("$\"Data Source=(LocalDB)\\\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30" +
+            ";Initial Catalog={MainWindow.username}\"")]
+        public string connectionString {
             get {
-                return ((string)(this["ArbeitDBCN"]));
-            }
-            set {
-                this["ArbeitDBCN"] = value;
+                return ((string)(this["connectionString"]));
             }
         }
     }

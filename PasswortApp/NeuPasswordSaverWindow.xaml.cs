@@ -50,7 +50,7 @@ namespace PasswortApp
                 try
                 {
                     // Verbindung zur Datenbank herstellen (Beispielverbindungszeichenfolge)
-                    string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Schueler\\source\\repos\\PasswortApp\\PasswortApp\\Database1.mdf;Integrated Security=True";
+                    string connectionString = Properties.Settings.Default.connectionString;
                     string query = "";
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
