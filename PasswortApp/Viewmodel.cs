@@ -32,7 +32,7 @@ namespace PasswortApp
 
         private void LoadDataFromDatabase()
         {
-         //   try { 
+          try { 
             connection.Open();
 
             string queryArbeit = "SELECT App, BenutzerName, Password FROM ArbeitSDB";
@@ -43,7 +43,11 @@ namespace PasswortApp
 
             string querySpiele = "SELECT App, BenutzerName, Password FROM SpieleSDB";
             LoadDataFromQuery(querySpiele, SpielePasswordDatenList);
-           // }
+            }
+            catch
+            {
+                MessageBox.Show("Datenbank wird nicht gefunden!","Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
           
 
         }

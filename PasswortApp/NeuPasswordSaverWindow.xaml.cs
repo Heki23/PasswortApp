@@ -102,5 +102,42 @@ namespace PasswortApp
             e.Cancel = true;
             Hide();
         }
+        #region Placeholders
+        private void AppTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(AppTextBox.Text))
+            {
+                appPlaceholder.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                appPlaceholder.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void AnmeldenameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(AnmeldenameTextBox.Text))
+            {
+                namePlaceholder.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                namePlaceholder.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void PasswortTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(PasswortTextBox.Text))
+            {
+                passwortPlaceholder.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                passwortPlaceholder.Visibility = Visibility.Visible;
+            }
+        }
+        #endregion
     }
 }

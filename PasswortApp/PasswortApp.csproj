@@ -271,6 +271,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
+    <Resource Include="Icon\suche.png" />
+    <Resource Include="Icon\neuedb.png" />
+    <Resource Include="Icon\appIcon.png" />
+    <Resource Include="Icon\benutzerIcon.png" />
+    <Resource Include="Icon\passwordIcon.png" />
     <Resource Include="Icon\return_icon_154912.png" />
     <Resource Include="Icon\copy.png" />
   </ItemGroup>

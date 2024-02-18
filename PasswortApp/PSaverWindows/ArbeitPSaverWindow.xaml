@@ -53,7 +53,11 @@
 
         <Label Template="{StaticResource header}" Margin="0,-189,0,189" />
 
-        <TextBox  HorizontalAlignment="Left" Height="36" Margin="597,68,0,0" VerticalAlignment="Top" Width="178" BorderThickness="2" BorderBrush="Black" Text="Suche" FontSize="15"/>
+        <Border BorderBrush="Black" BorderThickness="2" CornerRadius="18" Margin="597,68,0,0" Height="36" HorizontalAlignment="Left" VerticalAlignment="Top" Width="178" ToolTip="Funktion kommt bald">
+            <TextBox x:Name="searchTextBox" Width="158" Height="30" FontSize="15" FontFamily="25" TextChanged="TextBox_TextChanged" Background="{x:Null}" BorderBrush="{x:Null}"/>
+        </Border>
+        <Label x:Name="suchePlaceholder" Content="Suche" Margin="610,72,63,330" FontSize="15" Background="{x:Null}"/>
+        <Image Source="/Icon/suche.png"  Stretch="Uniform" Margin="742,74,37,336" Height="25" Width="20"/>
 
 
         <WrapPanel Width="60" Height="130" Margin="157,217,583,87">
@@ -65,17 +69,27 @@
             </Button>
         </WrapPanel>
 
-        <Grid Width="518" Height="29" Margin="275,119,7,286">
+        <Grid Height="29" Width="500" Margin="275,119,25,286" Background="Black">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+                <ColumnDefinition Width="115"></ColumnDefinition>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+                <ColumnDefinition Width="135"></ColumnDefinition>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+                <ColumnDefinition Width="170"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Label Content="App" Grid.Column="0" Height="28" Width="145" Foreground="White" Background="Black"  HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="White" BorderThickness="1"/>
-            <Label Content="Anmeldename" Grid.Column="1"  HorizontalAlignment="Left" Height="28"  VerticalAlignment="Center" Width="165" Foreground="White" Background="Black" BorderBrush="White" BorderThickness="1"/>
-            <Label Content="Passwort" Grid.Column="2"  HorizontalAlignment="Left" Height="28" VerticalAlignment="Center" Width="191" Foreground="White" Background="Black"  BorderBrush="White" BorderThickness="1"/>
+
+            <Image Source="/Icon/appIcon.png" Width="22" Grid.Column="0"/>
+            <Label Content="App" Grid.Column="1" Height="28" Width="145" Foreground="White"  HorizontalAlignment="Left" VerticalAlignment="Center" />
+           
+        
+            <Image Source="/Icon/benutzerIcon.png" Width="35" Grid.Column="2"/>
+            <Label Content="Anmeldename" Grid.Column="3"  HorizontalAlignment="Left" Height="28"  VerticalAlignment="Center" Width="165" Foreground="White" Background="Black" BorderThickness="1"/>
+
+            <Image Source="/Icon/passwordIcon.png" Width="22" Grid.Column="4"/>
+            <Label Content="Passwort" Grid.Column="5"  HorizontalAlignment="Left" Height="28" VerticalAlignment="Center" Width="191" Foreground="White" Background="Black" BorderThickness="1"/>
         </Grid>
-        <ListView x:Name="benutzerdatenlistbox" ItemTemplate="{StaticResource PasswortSaverTemplate}" Background="#FFEDEEF1" Foreground="White" BorderBrush="Black" BorderThickness="1" Height="255" Width="500" Margin="275,147,25,32" />
+        <ListView x:Name="benutzerdatenlistbox" ItemTemplate="{StaticResource PasswortSaverTemplate}" Background="#FFEDEEF1" Foreground="White" BorderBrush="Black" BorderThickness="1" Height="255" Width="500" Margin="275,147,25,32" d:ItemsSource="{d:SampleData ItemCount=5}" />
 
 
         <Label Content="Arbeit" HorizontalAlignment="Left" Height="55" Margin="21,130,0,0" VerticalAlignment="Top" Width="184" FontWeight="Bold" FontSize="35"/>

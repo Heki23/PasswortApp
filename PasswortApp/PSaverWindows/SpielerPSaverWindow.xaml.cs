@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Security.Permissions;
 using System.Text;
@@ -94,6 +95,18 @@ namespace PasswortApp
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = null;
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(searchTextBox.Text))
+            {
+                suchePlaceholder.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                suchePlaceholder.Visibility = Visibility.Visible;
+            }
         }
     }
 }
