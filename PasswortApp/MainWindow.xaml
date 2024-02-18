@@ -62,6 +62,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+
     </Window.Resources>
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -81,47 +83,57 @@
             </Rectangle>
 
 
-            <TextBox x:Name="loginEingebeneName" HorizontalAlignment="Left" Height="36" Margin="240,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" BorderBrush="Gray" FontSize="20" Background="White" Opacity="0.85"/>
-            <PasswordBox x:Name="loginEingebenePasswort"  Focusable="True" HorizontalAlignment="Left" Height="36" Margin="240,198,0,0" VerticalAlignment="Top" Width="300" BorderBrush="Gray" FontSize="20" Opacity="0.85"/>
+            <TextBox x:Name="loginEingebeneName" HorizontalAlignment="Left" Height="36" Margin="240,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" BorderBrush="Gray" FontSize="20" Background="White" Opacity="0.85" TextChanged="loginEingebeneName_TextChanged"/>
+            <PasswordBox x:Name="loginEingebenePasswort"  Focusable="True" HorizontalAlignment="Left" Height="36" Margin="241,217,0,0" VerticalAlignment="Top" Width="300" BorderBrush="Gray" FontSize="20" Opacity="0.85" PasswordChanged="loginEingebenePasswort_PasswordChanged"/>
+            <Label x:Name="benutzerNamePlaceholder" FontSize="15" Content="Benutzername" Margin="241,141,430,0"  VerticalAlignment="Top" Background="{x:Null}"  Opacity="0.5"/>
+            <Label x:Name="passwortNamePlaceholder"  FontSize="15" Content="Passwort" Margin="241,220,462,0" VerticalAlignment="Top" Opacity="0.5"/>
 
 
-            <Label x:Name="AnmeldenLabel" Content="Anmelden" HorizontalAlignment="Left" Height="58" Margin="326,54,0,0" VerticalAlignment="Top" Width="128" FontSize="25" />
-            <Button Style="{DynamicResource RoundedBtnTemplate}" x:Name="AnmeldenBtn" Content="Anmelden" HorizontalAlignment="Left" Margin="334,288,0,0" VerticalAlignment="Top" Height="34" Width="114" Click="Button_Click" Background="{x:Null}" BorderBrush="#FF1600FF" BorderThickness="2" Foreground="#FF0820FF" FontWeight="Medium"/>
-            <Button Content="Button" HorizontalAlignment="Left" Height="76" Margin="63,271,0,0" VerticalAlignment="Top" Width="141" Click="Button_Click_1"/>
-            <TextBox x:Name="UsernameTextBox" HorizontalAlignment="Left" Height="45" Margin="258,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="166"/>
+            <Label x:Name="AnmeldenLabel" Content="Anmelden" HorizontalAlignment="Left" Height="58" Margin="326,54,0,0" VerticalAlignment="Top" Width="169" FontSize="25" />
+            <Button x:Name="AnmeldenBtn" Style="{DynamicResource RoundedBtnTemplate}"  Content="Anmelden" HorizontalAlignment="Left" Margin="334,288,0,0" VerticalAlignment="Top" Height="34" Width="114" Click="LoginButton_Click" Background="{x:Null}" BorderBrush="#FF1600FF" BorderThickness="2" Foreground="#FF0820FF" FontWeight="Medium"/>
+            <Button x:Name="RegistrierenundDBBtn" Content="Registrieren" Style="{DynamicResource RoundedBtnTemplate}" HorizontalAlignment="Left" Height="34" Width="114" Margin="334,288,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="#FF1600FF" BorderThickness="2" Foreground="#FF0820FF" FontWeight="Medium" Click="dBErstellen_Click" Visibility="Hidden"/>
+            <Button x:Name="RegistrierenBtn" Content="Registrieren" HorizontalAlignment="Left" Height="20" Margin="356,327,0,0"  VerticalAlignment="Top" Width="70" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF1600FF" Click="RegistrierenBtn_Click"/>
+            <Button x:Name="ZuruekBtn" Visibility="Hidden" HorizontalAlignment="Left" Height="39" Opacity="0.5" Margin="218,44,0,0" VerticalAlignment="Top" Width="39" BorderBrush="{x:Null}" Background="{x:Null}" Click="ZuruekBtn_Click">
+                <Button.Content>
+                    <Image Source="Icon/return_icon_154912.png" />
+                </Button.Content>
+            </Button>
+
+
         </Grid>
         <Grid x:Name="OptionWindow" Visibility="Hidden">
-        <Rectangle x:Name="OptionwindowRectangle"   HorizontalAlignment="Center" Height="388" Stroke="Black" VerticalAlignment="Center" Width="500" Fill="White" Opacity="0.8">
-            <Rectangle.Style>
-                <Style TargetType="Rectangle">
-                    <Setter Property="RadiusX" Value="10"/>
-                    <Setter Property="RadiusY" Value="10"/>
-                </Style>
-            </Rectangle.Style>
-        </Rectangle>
+            <Rectangle x:Name="OptionwindowRectangle"   HorizontalAlignment="Center" Height="388" Stroke="Black" VerticalAlignment="Center" Width="500" Fill="White" Opacity="0.8">
+                <Rectangle.Style>
+                    <Style TargetType="Rectangle">
+                        <Setter Property="RadiusX" Value="10"/>
+                        <Setter Property="RadiusY" Value="10"/>
+                    </Style>
+                </Rectangle.Style>
+            </Rectangle>
 
-        <Button x:Name="SpielerButton" Content="Spieler Passwort"  HorizontalAlignment="Center" Height="40" Margin="0,128,0,0" VerticalAlignment="Top" Width="460" Background="{x:Null}" FontSize="20" Click="SpielerButton_Click" BorderBrush="#FF0022FF" BorderThickness="2" Foreground="#FF000FFF">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="10"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <Button x:Name="ArbeitButton" Content="Arbeit Passwort"  HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="460" Background="{x:Null}" FontSize="20" Click="ArbeitButton_Click_1" BorderBrush="#FF0022FF" BorderThickness="2" Foreground="#FF000FFF">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="10"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <Button x:Name="PrivateButton" Content="Private Passwort" HorizontalAlignment="Center" Height="40" Margin="0,242,0,0" VerticalAlignment="Top" Width="460" Background="{x:Null}" FontSize="20" Click="PrivateButton_Click" BorderBrush="#FF0022FF" BorderThickness="2" Foreground="#FF000FFF">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="10"/>
-                </Style>
-            </Button.Resources>
-        </Button>
+            <Button x:Name="SpielerButton" Content="Spieler Passwort"  HorizontalAlignment="Center" Height="40" Margin="0,128,0,0" VerticalAlignment="Top" Width="460" Background="{x:Null}" FontSize="20" Click="SpielerButton_Click" BorderBrush="#FF0022FF" BorderThickness="2" Foreground="#FF000FFF">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="ArbeitButton" Content="Arbeit Passwort"  HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="460" Background="{x:Null}" FontSize="20" Click="ArbeitButton_Click_1" BorderBrush="#FF0022FF" BorderThickness="2" Foreground="#FF000FFF">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="PrivateButton" Content="Private Passwort" HorizontalAlignment="Center" Height="40" Margin="0,242,0,0" VerticalAlignment="Top" Width="460" Background="{x:Null}" FontSize="20" Click="PrivateButton_Click" BorderBrush="#FF0022FF" BorderThickness="2" Foreground="#FF000FFF">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </Grid>
+
     </Grid>
     <!--<Grid>
 

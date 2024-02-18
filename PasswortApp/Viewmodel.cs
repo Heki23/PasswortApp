@@ -7,11 +7,13 @@ namespace PasswortApp
 {
     internal class Viewmodel
     {
+        //public string datenbankName;
         private SqlConnection connection;
 
         public ObservableCollection<Model> ArbeitPasswordDatenList { get; private set; }
         public ObservableCollection<Model> PrivatePasswordDatenList { get; private set; }
         public ObservableCollection<Model> SpielePasswordDatenList { get; private set; }
+
 
         public Viewmodel()
         {
@@ -19,15 +21,10 @@ namespace PasswortApp
             PrivatePasswordDatenList = new ObservableCollection<Model>();
             SpielePasswordDatenList = new ObservableCollection<Model>();
 
-            // string connectionString = $"{Properties.Settings.Default.connectionString}";
-           
-         //   string databasename = "test45_DB";
-           
+            
+            // Verbindung zur Datenbank herstellen
             string connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Initial Catalog={MainWindow.username}_DB";
 
-            // Verbindung zur Datenbank herstellen
-            //  string connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Initial Catalog={MainWindow.username}";
-            //  string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Schueler\\source\\repos\\PasswortApp\\PasswortApp\\Database1.mdf;Integrated Security=True";
             connection = new SqlConnection(connectionString);
 
             LoadDataFromDatabase();
@@ -35,6 +32,7 @@ namespace PasswortApp
 
         private void LoadDataFromDatabase()
         {
+         //   try { 
             connection.Open();
 
             string queryArbeit = "SELECT App, BenutzerName, Password FROM ArbeitSDB";
@@ -45,7 +43,8 @@ namespace PasswortApp
 
             string querySpiele = "SELECT App, BenutzerName, Password FROM SpieleSDB";
             LoadDataFromQuery(querySpiele, SpielePasswordDatenList);
-
+           // }
+          
 
         }
 

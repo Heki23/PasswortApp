@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PasswortApp"
         mc:Ignorable="d"
-        Title="WindowPrivatePassword" Height="450" Width="800" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+        Title="WindowPrivatePassword" Height="450" Width="800" SizeToContent="WidthAndHeight" ResizeMode="NoResize" Loaded="Window_Loaded">
     <!--Sammlung von Ressourcen, die für ein Fenster verfügbar sind -->
     <Window.Resources>
         <ResourceDictionary>

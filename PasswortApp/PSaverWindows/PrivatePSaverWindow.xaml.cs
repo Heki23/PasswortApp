@@ -90,5 +90,10 @@ namespace PasswortApp
             }
             RefreshListView();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = null;
+        }
     }
 }

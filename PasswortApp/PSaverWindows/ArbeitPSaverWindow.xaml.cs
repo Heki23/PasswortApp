@@ -42,6 +42,7 @@ namespace PasswortApp
         private void Neue_Click(object sender, RoutedEventArgs e)
         {
             // Fenster für das Speichern eines neuen Passworts anzeigen
+            neuPasswordSaverWindow.currentWindow = "ArbeitPSaverWindow";
             neuPasswordSaverWindow.ShowDialog(); // Verwenden Sie ShowDialog, um auf das Ergebnis zu warten
             if (neuPasswordSaverWindow.afterSaveButtonClicken)
             {
@@ -97,8 +98,7 @@ namespace PasswortApp
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            neuPasswordSaverWindow.currentWindow = "ArbeitPSaverWindow";
-
+            Mouse.OverrideCursor = null;
         }
     }
 }

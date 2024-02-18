@@ -271,6 +271,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
+    <Resource Include="Icon\return_icon_154912.png" />
     <Resource Include="Icon\copy.png" />
   </ItemGroup>
   <ItemGroup>
