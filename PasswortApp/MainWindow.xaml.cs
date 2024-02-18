@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.IO;
 using System.Net.PeerToPeer;
-
+using System.Security.Principal;
 
 namespace PasswortApp
 {
@@ -25,15 +25,15 @@ namespace PasswortApp
     /// </summary>
     public partial class MainWindow : Window
     {
-      
-      static public string username;
+
+        static public string username;
 
 
         public MainWindow()
         {
             InitializeComponent();
 
-            username = "TextBox23";
+            username = UsernameTextBox.Text.Trim();
 
         }
 
@@ -118,21 +118,17 @@ namespace PasswortApp
 
             }
         }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            //string connectionString = Properties.Settings.Default.connectionString;
+            username = UsernameTextBox.Text.Trim();
 
-            string username = UsernameTextBox.Text;
-            string databaseName = $"{username}_DB"; // Verwenden Sie einen bestimmten Datenbanknamen, z.B. Benutzername_DB
-
-            string connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30";
+            string databaseName = $"{username}_DB";
+            string connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
-                // Überprüfen, ob die Datenbank bereits existiert
                 string checkDatabaseQuery = $"SELECT COUNT(*) FROM sys.databases WHERE name = '{databaseName}'";
                 using (SqlCommand command = new SqlCommand(checkDatabaseQuery, connection))
                 {
@@ -153,44 +149,45 @@ namespace PasswortApp
                             useDatabaseCommand.ExecuteNonQuery();
                         }
 
-                        // Hier erstellen Sie die Tabellen in der neu erstellten Datenbank
+                       // Hier erstellen Sie die Tabellen in der neu erstellten Datenbank
                         string createArbeitSDBTableQuery = @"CREATE TABLE ArbeitSDB
-                                    (
-                                        [App] VARCHAR (50) NOT NULL,
-                                        [BenutzerName] VARCHAR (50) NOT NULL,
-                                        [Password] VARCHAR (50) NOT NULL,
-                                        PRIMARY KEY CLUSTERED ([App] ASC)
-                                    )";
+                                                    (
+                                                        [App] VARCHAR (50) NOT NULL,
+                                                        [BenutzerName] VARCHAR (50) NOT NULL,
+                                                        [Password] VARCHAR (50) NOT NULL,
+                                                        PRIMARY KEY CLUSTERED ([App] ASC)
+                                                    )";
                         using (SqlCommand createArbeitSDBTableCommand = new SqlCommand(createArbeitSDBTableQuery, connection))
                         {
                             createArbeitSDBTableCommand.ExecuteNonQuery();
                         }
 
                         string createPrivateSDBTableQuery = @"CREATE TABLE PrivateSDB
-                                    (
-                                        [App] VARCHAR (50) NOT NULL,
-                                        [BenutzerName] VARCHAR (50) NOT NULL,
-                                        [Password] VARCHAR (50) NOT NULL,
-                                        PRIMARY KEY CLUSTERED ([App] ASC)
-                                    )";
+                                                    (
+                                                        [App] VARCHAR (50) NOT NULL,
+                                                        [BenutzerName] VARCHAR (50) NOT NULL,
+                                                        [Password] VARCHAR (50) NOT NULL,
+                                                        PRIMARY KEY CLUSTERED ([App] ASC)
+                                                    )";
                         using (SqlCommand createPrivateSDBTableCommand = new SqlCommand(createPrivateSDBTableQuery, connection))
                         {
                             createPrivateSDBTableCommand.ExecuteNonQuery();
                         }
 
                         string createSpieleSDBTableQuery = @"CREATE TABLE SpieleSDB
-                                    (
-                                        [App] VARCHAR (50) NOT NULL,
-                                        [BenutzerName] VARCHAR (50) NOT NULL,
-                                        [Password] VARCHAR (50) NOT NULL,
-                                        PRIMARY KEY CLUSTERED ([App] ASC)
-                                    )";
+                                                    (
+                                                        [App] VARCHAR (50) NOT NULL,
+                                                        [BenutzerName] VARCHAR (50) NOT NULL,
+                                                        [Password] VARCHAR (50) NOT NULL,
+                                                        PRIMARY KEY CLUSTERED ([App] ASC)
+                                                    )";
                         using (SqlCommand createSpieleSDBTableCommand = new SqlCommand(createSpieleSDBTableQuery, connection))
                         {
                             createSpieleSDBTableCommand.ExecuteNonQuery();
                         }
 
-                        MessageBox.Show("Datenbank und Tabellen wurden erfolgreich erstellt.", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                        MessageBox.Show("Datenbank wurde erfolgreich erstellt und ausgewählt.", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
                     {
@@ -199,5 +196,91 @@ namespace PasswortApp
                 }
             }
         }
+
+
+
+        //private void Button_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    //string connectionString = Properties.Settings.Default.connectionString;
+
+        //    string username = UsernameTextBox.Text.Trim();
+        //    string databaseName = $"{username}_DB"; // Verwenden Sie einen bestimmten Datenbanknamen, z.B. Benutzername_DB
+        //    string connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;";
+
+
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        connection.Open();
+
+        //        // Überprüfen, ob die Datenbank bereits existiert
+        //        string checkDatabaseQuery = $"SELECT COUNT(*) FROM sys.databases WHERE name = '{databaseName}'";
+        //        using (SqlCommand command = new SqlCommand(checkDatabaseQuery, connection))
+        //        {
+        //            int databaseExists = (int)command.ExecuteScalar();
+        //            if (databaseExists == 0)
+        //            {
+        //                // Wenn die Datenbank nicht existiert, erstellen
+        //                string createDatabaseQuery = $"CREATE DATABASE {databaseName}";
+        //                using (SqlCommand createDatabaseCommand = new SqlCommand(createDatabaseQuery, connection))
+        //                {
+        //                    createDatabaseCommand.ExecuteNonQuery();
+        //                }
+
+        //                // Verwenden Sie die neu erstellte Datenbank
+        //                string useDatabaseQuery = $"USE {databaseName}";
+        //                using (SqlCommand useDatabaseCommand = new SqlCommand(useDatabaseQuery, connection))
+        //                {
+        //                    useDatabaseCommand.ExecuteNonQuery();
+        //                }
+        //                //  GrantPermissions(databaseName);
+
+        //                // Hier erstellen Sie die Tabellen in der neu erstellten Datenbank
+        //                string createArbeitSDBTableQuery = @"CREATE TABLE ArbeitSDB
+        //                            (
+        //                                [App] VARCHAR (50) NOT NULL,
+        //                                [BenutzerName] VARCHAR (50) NOT NULL,
+        //                                [Password] VARCHAR (50) NOT NULL,
+        //                                PRIMARY KEY CLUSTERED ([App] ASC)
+        //                            )";
+        //                using (SqlCommand createArbeitSDBTableCommand = new SqlCommand(createArbeitSDBTableQuery, connection))
+        //                {
+        //                    createArbeitSDBTableCommand.ExecuteNonQuery();
+        //                }
+
+        //                string createPrivateSDBTableQuery = @"CREATE TABLE PrivateSDB
+        //                            (
+        //                                [App] VARCHAR (50) NOT NULL,
+        //                                [BenutzerName] VARCHAR (50) NOT NULL,
+        //                                [Password] VARCHAR (50) NOT NULL,
+        //                                PRIMARY KEY CLUSTERED ([App] ASC)
+        //                            )";
+        //                using (SqlCommand createPrivateSDBTableCommand = new SqlCommand(createPrivateSDBTableQuery, connection))
+        //                {
+        //                    createPrivateSDBTableCommand.ExecuteNonQuery();
+        //                }
+
+        //                string createSpieleSDBTableQuery = @"CREATE TABLE SpieleSDB
+        //                            (
+        //                                [App] VARCHAR (50) NOT NULL,
+        //                                [BenutzerName] VARCHAR (50) NOT NULL,
+        //                                [Password] VARCHAR (50) NOT NULL,
+        //                                PRIMARY KEY CLUSTERED ([App] ASC)
+        //                            )";
+        //                using (SqlCommand createSpieleSDBTableCommand = new SqlCommand(createSpieleSDBTableQuery, connection))
+        //                {
+        //                    createSpieleSDBTableCommand.ExecuteNonQuery();
+        //                }
+
+
+
+        //                MessageBox.Show("Datenbank und Tabellen wurden erfolgreich erstellt.", "Erfolg", MessageBoxButton.OK, MessageBoxImage.Information);
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show("Datenbank existiert bereits.", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

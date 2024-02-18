@@ -50,7 +50,7 @@ namespace PasswortApp
                 try
                 {
                     // Verbindung zur Datenbank herstellen (Beispielverbindungszeichenfolge)
-                    string connectionString = Properties.Settings.Default.connectionString;
+                    string connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Initial Catalog={MainWindow.username}_DB";
                     string query = "";
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {

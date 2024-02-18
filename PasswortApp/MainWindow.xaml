@@ -88,7 +88,7 @@
             <Label x:Name="AnmeldenLabel" Content="Anmelden" HorizontalAlignment="Left" Height="58" Margin="326,54,0,0" VerticalAlignment="Top" Width="128" FontSize="25" />
             <Button Style="{DynamicResource RoundedBtnTemplate}" x:Name="AnmeldenBtn" Content="Anmelden" HorizontalAlignment="Left" Margin="334,288,0,0" VerticalAlignment="Top" Height="34" Width="114" Click="Button_Click" Background="{x:Null}" BorderBrush="#FF1600FF" BorderThickness="2" Foreground="#FF0820FF" FontWeight="Medium"/>
             <Button Content="Button" HorizontalAlignment="Left" Height="76" Margin="63,271,0,0" VerticalAlignment="Top" Width="141" Click="Button_Click_1"/>
-            <TextBox x:Name="UsernameTextBox" HorizontalAlignment="Left" Height="45" Margin="258,322,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="166"/>
+            <TextBox x:Name="UsernameTextBox" HorizontalAlignment="Left" Height="45" Margin="258,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="166"/>
         </Grid>
         <Grid x:Name="OptionWindow" Visibility="Hidden">
         <Rectangle x:Name="OptionwindowRectangle"   HorizontalAlignment="Center" Height="388" Stroke="Black" VerticalAlignment="Center" Width="500" Fill="White" Opacity="0.8">

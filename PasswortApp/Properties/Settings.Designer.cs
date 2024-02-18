@@ -25,8 +25,7 @@ namespace PasswortApp.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("$\"Data Source=(LocalDB)\\\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30" +
-            ";Initial Catalog={MainWindow.username}\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string connectionString {
             get {
                 return ((string)(this["connectionString"]));
