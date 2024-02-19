@@ -139,5 +139,40 @@ namespace PasswortApp
             }
         }
         #endregion
+  
+
+        private void appPlaceholder_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.IBeam;
+            AppTextBox.Focus();
+        }
+
+        private void appPlaceholder_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.Arrow;
+        }
+
+        private void passwortPlaceholder_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.IBeam;
+            PasswortTextBox.Focus();
+        }
+        private void passwortPlaceholder_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.Arrow;
+        }
+
+        private void namePlaceholder_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.IBeam;
+            AnmeldenameTextBox.Focus();
+        }
+
+        private void namePlaceholder_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.Arrow;
+        }
+
+      
     }
 }

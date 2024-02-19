@@ -85,8 +85,8 @@
 
             <TextBox x:Name="loginEingebeneName" HorizontalAlignment="Left" Height="36" Margin="240,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" BorderBrush="Gray" FontSize="20" Background="White" Opacity="0.85" TextChanged="loginEingebeneName_TextChanged"/>
             <PasswordBox x:Name="loginEingebenePasswort"  Focusable="True" HorizontalAlignment="Left" Height="36" Margin="241,217,0,0" VerticalAlignment="Top" Width="300" BorderBrush="Gray" FontSize="20" Opacity="0.85" PasswordChanged="loginEingebenePasswort_PasswordChanged"/>
-            <Label x:Name="benutzerNamePlaceholder" FontSize="15" Content="Benutzername" Margin="241,141,430,0"  VerticalAlignment="Top" Background="{x:Null}"  Opacity="0.5"/>
-            <Label x:Name="passwortNamePlaceholder"  FontSize="15" Content="Passwort" Margin="241,220,462,0" VerticalAlignment="Top" Opacity="0.5"/>
+            <Label x:Name="benutzerNamePlaceholder" FontSize="15" Content="Benutzername" Margin="241,141,260,0"  VerticalAlignment="Top" Background="{x:Null}"  Opacity="0.5" MouseEnter="benutzerNamePlaceholder_MouseEnter" MouseLeave="benutzerNamePlaceholder_MouseLeave"/>
+            <Label x:Name="passwortNamePlaceholder"  FontSize="15" Content="Passwort" Margin="241,220,259,0" VerticalAlignment="Top" Opacity="0.5" MouseEnter="passwortNamePlaceholder_MouseEnter" MouseLeave="passwortNamePlaceholder_MouseLeave"/>
 
 
             <Label x:Name="AnmeldenLabel" Content="Anmelden" HorizontalAlignment="Left" Height="58" Margin="326,54,0,0" VerticalAlignment="Top" Width="169" FontSize="25" />
