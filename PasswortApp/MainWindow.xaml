@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PasswortApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded" KeyDown="Window_KeyDown" >
+        Title="Password Saver" Height="450" Width="800" Loaded="Window_Loaded" KeyDown="Window_KeyDown" >
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -72,7 +72,11 @@
         </LinearGradientBrush>
     </Window.Background>
     <Grid >
-        <Grid x:Name="loginWindow">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="49*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="loginWindow" Grid.ColumnSpan="2">
             <Rectangle x:Name="loginWhiteRectangle" HorizontalAlignment="Left" Height="378" Margin="204,22,0,0" Stroke="#FF4D4848" VerticalAlignment="Top" Width="374" Fill="White" Opacity="0.8">
                 <Rectangle.Style>
                     <Style TargetType="Rectangle">
@@ -101,7 +105,7 @@
 
 
         </Grid>
-        <Grid x:Name="OptionWindow" Visibility="Hidden">
+        <Grid x:Name="OptionWindow" Visibility="Hidden" Grid.ColumnSpan="2">
             <Rectangle x:Name="OptionwindowRectangle"   HorizontalAlignment="Center" Height="388" Stroke="Black" VerticalAlignment="Center" Width="500" Fill="White" Opacity="0.8">
                 <Rectangle.Style>
                     <Style TargetType="Rectangle">
