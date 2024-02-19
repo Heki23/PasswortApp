@@ -32,6 +32,10 @@
 
 - Benutzername und Passwort speichern
 
+### :gear: Installation
+
+https://github.com/Heki23/PasswortApp/blob/master/PasswordSaverSetup/PasswordSaverSetup.msi
+
 
 ## :handshake: Contact
 
