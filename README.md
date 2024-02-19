@@ -8,13 +8,17 @@
 
 </div>
 
-# :notebook_with_decorative_cover: Table of Contents
+# :notebook_with_decorative_cover: Inhaltsverzeichnis
 
 - [About the Project](#star2-about-the-project)
 - [Contact](#handshake-contact)
 
 
-## :star2: About the Project
+## :star2: Über das Projekt
+
+<p> In meiner App gibt es drei Kategorien für die Passwortverwaltung: Spiele, Privates und Arbeit. Im Spiele-Bereich können Benutzer Passwörter für Spiele speichern, zum Beispiel für GTA5. Im Privates-Bereich können private Passwörter wie beispielsweise E-Mail-Passwörter hinterlegt werden. Im Arbeit-Bereich können Arbeitspasswörter, wie zum Beispiel Passwörter für Arbeits-E-Mails, gespeichert werden. </p>
+
+
 
 ### :camera: Screenshots
 
