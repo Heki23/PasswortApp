@@ -34,10 +34,6 @@
 - Einfaches Kopieren von Passwörtern
 - Verwaltung von Passwörtern
 
-### :gear: Installation
-
-https://github.com/Heki23/PasswortApp/blob/master/PasswordSaverSetup/PasswordSaverSetup.msi
-
 
 ## :handshake: Contact
 
