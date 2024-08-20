@@ -5,7 +5,6 @@
 
 <h4> <a href="https://github.com/Heki23/PasswortApp/issues"> Report Bug </a> <span> · </span> <a href="https://github.com/Heki23/PasswortApp/issues"> Request Feature </a> </h4>
 
-
 </div>
 
 
@@ -18,9 +17,9 @@
 
 ### :camera: Screenshots
 
-<div align="center"> <a href=""><img src="https://github.com/Heki23/PasswortApp/blob/master/Screenshots/1.png" alt='image' width='800'/></a> </div>
-<div align="center"> <a href=""><img src="https://github.com/Heki23/PasswortApp/blob/master/Screenshots/2.png" alt='image' width='800'/></a> </div>
-<div align="center"> <a href=""><img src="https://github.com/Heki23/PasswortApp/blob/master/Screenshots/3.png" alt='image' width='800'/></a> </div>
+<div align="justify"> <a href=""><img src="https://github.com/Heki23/PasswortApp/blob/master/Screenshots/1.png" alt='image'/></a>
+ <a href=""><img src="https://github.com/Heki23/PasswortApp/blob/master/Screenshots/2.png" alt='image' /></a> 
+ <a href=""><img src="https://github.com/Heki23/PasswortApp/blob/master/Screenshots/3.png" alt='image' width='97%'/></a> </div>
 
 
 
