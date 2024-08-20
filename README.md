@@ -12,7 +12,7 @@
 
 - [About the Project](#star2-about-the-project)
 - [Contact](#handshake-contact)
-- [Screenshots]
+- [Screenshots](#camera)
 
 
 ## :star2: Über das Projekt
