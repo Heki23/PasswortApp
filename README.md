@@ -8,11 +8,6 @@
 
 </div>
 
-# :notebook_with_decorative_cover: Inhaltsverzeichnis
-
-- [About the Project](#star2-about-the-project)
-- [Contact](#handshake-contact)
-- [Screenshots](#camera)
 
 
 ## :star2: Über das Projekt
@@ -31,7 +26,13 @@
 
 ### :dart: Features
 
-- Benutzername und Passwort speichern
+- Speichern von Benutzernamen und Passwörtern
+- Unterstützung für mehrere Benutzer
+- Lokale Datenbank
+- Offline-Nutzung
+- Verschiedene Kategorien (Spiele, Privates, Arbeit)
+- Einfaches Kopieren von Passwörtern
+- Verwaltung von Passwörtern
 
 ### :gear: Installation
 
