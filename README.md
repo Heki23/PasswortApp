@@ -3,7 +3,7 @@
 <h1>Password Saver</h1>
 <p>In meiner App gibt es drei Kategorien für die Passwortverwaltung: Spiele, Privates und Arbeit. Im Spiele-Bereich können Benutzer Passwörter für Spiele, wie zum Beispiel GTA5, speichern. Im Privates-Bereich können private Passwörter, wie E-Mail-Passwörter, hinterlegt werden. Im Arbeit-Bereich können Arbeitspasswörter, wie Passwörter für Arbeits-E-Mails, gespeichert werden</p>
 
-<h4> <span> · </span> <a href="https://github.com/Heki23/PasswortApp/issues"> Report Bug </a> <span> · </span> <a href="https://github.com/Heki23/PasswortApp/issues"> Request Feature </a> </h4>
+<h4> <a href="https://github.com/Heki23/PasswortApp/issues"> Report Bug </a> <span> · </span> <a href="https://github.com/Heki23/PasswortApp/issues"> Request Feature </a> </h4>
 
 
 </div>
